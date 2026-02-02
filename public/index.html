@@ -25,11 +25,17 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <script>
-      tailwind = window.tailwind || {};
-      tailwind.config = tailwind.config || {};
-      tailwind.config.darkMode = 'class';
+      try {
+        var _theme = localStorage.getItem('theme');
+        if (_theme === 'dark') document.documentElement.classList.add('dark');
+        else document.documentElement.classList.remove('dark');
+      } catch (e) {}
     </script>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Merriweather serif from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Tailwind is compiled via PostCSS in this project (no CDN in production) -->
     <title>Todooly</title>
   </head>
   <body>

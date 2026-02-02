@@ -1,8 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* App defaults + serif fallback retained */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: var(--app-font);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,3 +14,67 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* Minimal dark fallback for browsers without generated dark: utilities */
+.dark body {
+  background-color: #0b1220;
+  color: #e6eef8;
+}
+
+.dark .bg-white {
+  background-color: #0f1724;
+}
+
+.dark .text-gray-800 {
+  color: #e6eef8;
+}
+
+/* Global serif, semibold typography */
+:root {
+  --app-font: 'Merriweather', Georgia, "Times New Roman", Times, serif;
+}
+
+body,
+button,
+input,
+textarea,
+select,
+a,
+li,
+span,
+label {
+  font-family: var(--app-font) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2px;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Headings slightly bolder and more spacious */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700 !important;
+  letter-spacing: 0.4px;
+}
+
+/* Use a clean system sans-serif for subheadings */
+:root {
+  --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}
+
+h2, h3, h4, h5 {
+  font-family: var(--ui-font) !important;
+  font-weight: 600 !important;
+}
+
+/* Apply the same sans-serif style to paragraphs but use Merriweather regular weight */
+p {
+  font-family: var(--ui-font) !important;
+  font-weight: 400 !important;
+}
+
+/* Inputs/placeholders match the typographic style */
+input::placeholder, textarea::placeholder {
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+
