@@ -7,6 +7,15 @@ export default function Todooly() {
   const [completions, setCompletions] = useState({});
   const [newTaskText, setNewTaskText] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [isDark, setIsDark] = useState(() => {
+    try {
+      const saved = localStorage.getItem('theme');
+      if (saved) return saved === 'dark';
+      return false;
+    } catch (e) {
+      return false;
+    }
+  });
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -19,6 +28,15 @@ export default function Todooly() {
       saveData();
     }
   }, [tasks, completions, isLoading]);
+
+  useEffect(() => {
+    try {
+      document.documentElement.classList.toggle('dark', isDark);
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    } catch (e) {
+      // ignore
+    }
+  }, [isDark]);
 
   const loadData = () => {
     try {
@@ -151,17 +169,17 @@ export default function Todooly() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 flex items-center justify-center">
-        <div className="text-gray-600">Loading...</div>
+      <div style={{ fontFamily: 'Georgia, "Times New Roman", Times, serif' }} className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 flex items-center justify-center">
+        <div className="text-gray-600 dark:text-gray-300">Loading...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 md:p-8">
+    <div style={{ fontFamily: 'Georgia, "Times New Roman", Times, serif' }} className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-gray-800 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-3">Todooly</h1>
+          <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-3">Todooly</h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Track your daily repeating tasks. Complete all tasks to turn the day <span className="text-green-600 font-semibold">green</span>, 
             or leave some incomplete and it turns <span className="text-red-600 font-semibold">red</span>. 
@@ -171,7 +189,7 @@ export default function Todooly() {
         
         <div className="grid md:grid-cols-2 gap-8">
           {/* Calendar Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-6">
               <button onClick={previousMonth} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
                 <ChevronLeft className="w-6 h-6" />
@@ -184,7 +202,7 @@ export default function Todooly() {
             
             <div className="grid grid-cols-7 gap-2 mb-2">
               {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map(day => (
-                <div key={day} className="text-center text-sm font-semibold text-gray-600 py-2">
+                <div key={day} className="text-center text-sm font-semibold text-gray-600 dark:text-gray-400 py-2">
                   {day}
                 </div>
               ))}
@@ -207,12 +225,12 @@ export default function Todooly() {
           </div>
 
           {/* Checklist Section */}
-          <div className="bg-white rounded-2xl shadow-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6">Today's Tasks</h2>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
+            <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100 mb-6">Today's Tasks</h2>
             
             <div className="space-y-3 mb-6">
               {tasks.map(task => (
-                <div key={task.id} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                <div key={task.id} className="flex items-center gap-3 p-3 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
                   <button
                     onClick={() => toggleTask(task.id, todayKey)}
                     className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${
@@ -223,7 +241,7 @@ export default function Todooly() {
                   >
                     {todayCompletions[task.id] && <Check className="w-4 h-4 text-white" />}
                   </button>
-                  <span className={`flex-1 ${todayCompletions[task.id] ? 'line-through text-gray-500' : 'text-gray-800'}`}>
+                  <span className={`flex-1 ${todayCompletions[task.id] ? 'line-through text-gray-500' : 'text-gray-800 dark:text-gray-100'}`}>
                     {task.text}
                   </span>
                   <button
@@ -236,7 +254,7 @@ export default function Todooly() {
               ))}
               
               {tasks.length === 0 && (
-                <p className="text-gray-500 text-center py-8">No tasks yet. Add one below!</p>
+                <p className="text-gray-500 dark:text-gray-300 text-center py-8">No tasks yet. Add one below!</p>
               )}
             </div>
 
@@ -247,7 +265,7 @@ export default function Todooly() {
                 onChange={(e) => setNewTaskText(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addTask()}
                 placeholder="Add a new task..."
-                className="flex-1 px-4 py-2 border-2 border-gray-200 rounded-lg focus:outline-none focus:border-blue-500 transition-colors"
+                className="flex-1 px-4 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100 transition-colors"
               />
               <button
                 onClick={addTask}
@@ -260,6 +278,12 @@ export default function Todooly() {
           </div>
         </div>
       </div>
+      <button
+        onClick={() => setIsDark(prev => !prev)}
+        className="fixed bottom-6 right-6 px-4 py-2 bg-gray-800 dark:bg-gray-100 text-white dark:text-gray-800 border-2 border-gray-700 dark:border-gray-300 rounded-lg hover:bg-gray-700 dark:hover:bg-gray-200 transition font-medium"
+      >
+        {isDark ? 'Light' : 'Dark'}
+      </button>
     </div>
   );
 }

@@ -24,6 +24,11 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
+    <script>
+      tailwind = window.tailwind || {};
+      tailwind.config = tailwind.config || {};
+      tailwind.config.darkMode = 'class';
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Todooly</title>
   </head>
