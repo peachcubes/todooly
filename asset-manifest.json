@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/todooly/static/css/main.e6c13ad2.css",
-    "main.js": "/todooly/static/js/main.a3092524.js",
+    "main.js": "/todooly/static/js/main.88069fe6.js",
     "static/js/453.7af306c3.chunk.js": "/todooly/static/js/453.7af306c3.chunk.js",
     "index.html": "/todooly/index.html",
     "main.e6c13ad2.css.map": "/todooly/static/css/main.e6c13ad2.css.map",
-    "main.a3092524.js.map": "/todooly/static/js/main.a3092524.js.map",
+    "main.88069fe6.js.map": "/todooly/static/js/main.88069fe6.js.map",
     "453.7af306c3.chunk.js.map": "/todooly/static/js/453.7af306c3.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
-    "static/js/main.a3092524.js"
+    "static/js/main.88069fe6.js"
   ]
 }
