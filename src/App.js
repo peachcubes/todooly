@@ -160,7 +160,14 @@ export default function Todooly() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">Todooly</h1>
+        <div className="text-center mb-8">
+          <h1 className="text-4xl font-bold text-gray-800 mb-3">Todooly</h1>
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Track your daily repeating tasks. Complete all tasks to turn the day <span className="text-green-600 font-semibold">green</span>, 
+            or leave some incomplete and it turns <span className="text-red-600 font-semibold">red</span>. 
+            Build your streak and stay consistent!
+          </p>
+        </div>
         
         <div className="grid md:grid-cols-2 gap-8">
           {/* Calendar Section */}
