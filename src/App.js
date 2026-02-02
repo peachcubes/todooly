@@ -60,7 +60,7 @@ export default function Todooly() {
         setCompletions(JSON.parse(savedCompletions));
       }
     } catch (error) {
-      console.log('No saved data found, starting fresh');
+      // Silently fail if no saved data exists
     }
     setIsLoading(false);
   };

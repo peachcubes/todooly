@@ -1,6 +1,8 @@
+/* stylelint-disable at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
 
 /* App defaults + serif fallback retained */
 body {
@@ -29,11 +31,13 @@ code {
   color: #e6eef8;
 }
 
-/* Global serif, semibold typography */
+/* Global CSS variables and typography */
 :root {
   --app-font: 'Merriweather', Georgia, "Times New Roman", Times, serif;
+  --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
+/* Base UI element typography (serif, regular weight) */
 body,
 button,
 input,
@@ -49,20 +53,10 @@ label {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Headings slightly bolder and more spacious */
+/* Headings: serif, bold, spacious */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700 !important;
   letter-spacing: 0.4px;
-}
-
-/* Use a clean system sans-serif for subheadings */
-:root {
-  --ui-font: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-}
-
-h2, h3, h4, h5 {
-  font-family: var(--ui-font) !important;
-  font-weight: 600 !important;
 }
 
 /* Apply the same sans-serif style to paragraphs but use Merriweather regular weight */
