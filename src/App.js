@@ -16,6 +16,7 @@ export default function Todooly() {
       return false;
     }
   });
+  const [isInstallOpen, setIsInstallOpen] = useState(false);
 
   // Load data from localStorage on mount
   useEffect(() => {
@@ -191,11 +192,11 @@ export default function Todooly() {
           {/* Calendar Section */}
           <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6">
             <div className="flex items-center justify-between mb-6">
-              <button onClick={previousMonth} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <button onClick={previousMonth} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-gray-800 dark:text-gray-200">
                 <ChevronLeft className="w-6 h-6" />
               </button>
-              <h2 className="text-2xl font-semibold text-gray-800">{monthName}</h2>
-              <button onClick={nextMonth} className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+              <h2 className="text-2xl font-semibold text-gray-800 dark:text-gray-100">{monthName}</h2>
+              <button onClick={nextMonth} className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-lg transition-colors text-gray-800 dark:text-gray-200">
                 <ChevronRight className="w-6 h-6" />
               </button>
             </div>
@@ -212,13 +213,13 @@ export default function Todooly() {
               {renderCalendar()}
             </div>
 
-            <div className="mt-6 flex items-center justify-center gap-6 text-sm">
+            <div className="mt-6 flex items-center justify-center gap-6 text-sm text-gray-700 dark:text-gray-300">
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-green-100 border-2 border-green-400 rounded"></div>
+                <div className="w-4 h-4 bg-green-100 dark:bg-green-900 border-2 border-green-400 dark:border-green-500 rounded"></div>
                 <span>All Done</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-4 h-4 bg-red-100 border-2 border-red-400 rounded"></div>
+                <div className="w-4 h-4 bg-red-100 dark:bg-red-900 border-2 border-red-400 dark:border-red-500 rounded"></div>
                 <span>Incomplete</span>
               </div>
             </div>
@@ -236,7 +237,7 @@ export default function Todooly() {
                     className={`w-6 h-6 rounded border-2 flex items-center justify-center transition-colors ${
                       todayCompletions[task.id]
                         ? 'bg-green-500 border-green-500'
-                        : 'border-gray-300 hover:border-green-400'
+                        : 'border-gray-300 dark:border-gray-500 hover:border-green-400 dark:hover:border-green-400'
                     }`}
                   >
                     {todayCompletions[task.id] && <Check className="w-4 h-4 text-white" />}
@@ -246,7 +247,7 @@ export default function Todooly() {
                   </span>
                   <button
                     onClick={() => deleteTask(task.id)}
-                    className="p-1 hover:bg-red-100 rounded transition-colors"
+                    className="p-1 hover:bg-red-100 dark:hover:bg-red-900 rounded transition-colors"
                   >
                     <X className="w-5 h-5 text-red-500" />
                   </button>
@@ -265,7 +266,7 @@ export default function Todooly() {
                 onChange={(e) => setNewTaskText(e.target.value)}
                 onKeyPress={(e) => e.key === 'Enter' && addTask()}
                 placeholder="Add a new task..."
-                className="flex-1 px-4 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100 transition-colors"
+                className="flex-1 px-4 py-2 border-2 border-gray-200 dark:border-gray-600 rounded-lg focus:outline-none focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 transition-colors"
               />
               <button
                 onClick={addTask}
@@ -277,6 +278,33 @@ export default function Todooly() {
             </div>
           </div>
         </div>
+
+        {/* Install Instructions Dropdown */}
+        <div className="mt-12 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-6 text-center">
+          <button
+            onClick={() => setIsInstallOpen(!isInstallOpen)}
+            className="w-full flex items-center justify-center gap-2 text-2xl font-bold text-gray-800 dark:text-gray-100 hover:opacity-80 transition"
+          >
+            <span>Add to Home Screen</span>
+            <span className={`transform transition-transform ${isInstallOpen ? 'rotate-180' : ''}`}>▼</span>
+          </button>
+          {isInstallOpen && (
+            <div className="mt-4 space-y-3 text-gray-700 dark:text-gray-300 max-w-2xl mx-auto">
+              <p className="text-lg">Install Todooly as an app on your device for quick access:</p>
+              <div className="bg-white dark:bg-gray-900 rounded-lg p-4 space-y-2 text-sm">
+                <p><strong>📱 On iOS:</strong> Tap the Share button → Add to Home Screen → Done</p>
+                <p><strong>🤖 On Android:</strong> Tap the menu (⋮) → Install app → Confirm</p>
+                <p><strong>💻 On Desktop:</strong> Click the install icon in the address bar or menu</p>
+              </div>
+              <p className="text-sm text-gray-600 dark:text-gray-400">Your tasks will NOT! sync automatically across all devices!</p>
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        <footer className="mt-16 text-center text-gray-600 dark:text-gray-400 text-sm pb-20">
+          <p>vibecoded with ❤️ from <span className="font-semibold text-gray-800 dark:text-gray-200">peachcubes</span></p>
+        </footer>
       </div>
       <button
         onClick={() => setIsDark(prev => !prev)}
