@@ -23,6 +23,15 @@ export default function Todooly() {
     loadData();
   }, []);
 
+  // Ensure page title matches app name (used by some platforms when installing)
+  useEffect(() => {
+    try {
+      document.title = 'Todooly';
+    } catch (e) {
+      // ignore
+    }
+  }, []);
+
   // Save data whenever it changes
   useEffect(() => {
     if (!isLoading) {
@@ -293,7 +302,7 @@ export default function Todooly() {
               <p className="text-lg">Install Todooly as an app on your device for quick access:</p>
               <div className="bg-white dark:bg-gray-900 rounded-lg p-4 space-y-2 text-sm">
                 <p><strong>📱 On iOS:</strong> Tap the Share button → Add to Home Screen → Done</p>
-                <p><strong>🤖 On Android:</strong> Tap the menu (⋮) → Install app → Confirm</p>
+                <p><strong>🤖 On Android:</strong> Use the browser menu (⋮) and choose "Install app" or "Add to Home screen" (varies by browser)</p>
                 <p><strong>💻 On Desktop:</strong> Click the install icon in the address bar or menu</p>
               </div>
               <p className="text-sm text-gray-600 dark:text-gray-400">Your tasks will NOT! sync automatically across all devices!</p>
